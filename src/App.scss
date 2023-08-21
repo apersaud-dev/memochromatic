@@ -1,0 +1,246 @@
+@import './sass/_reset';
+@import './sass/_typography';
+
+:root {
+    background-color: #3d3d3d;
+
+    // @media (prefers-color-scheme: dark) {
+    //     background-color: #141415;
+    // }
+
+    // @media (prefers-color-scheme: light) {
+    //     background-color: #fbfbfb;
+    // }
+}
+
+.App {
+    // background-color: #fbfbfb;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    height: 100vh;
+
+}
+
+.board {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gridRow {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.box {
+    background-color: #3d3d3d;
+    border: 1px solid #8f8f8f;
+    padding: 0;
+
+    perspective: 300px;
+    transition: transform 0.75s;
+    transform-style: preserve-3d;
+    cursor: pointer;
+
+    // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    // @media (prefers-color-scheme: dark) {
+    //     background-color: #141415;
+    //     border: 1px solid white;
+    // }
+
+    // @media (prefers-color-scheme: light) {
+    //     background-color: #fbfbfb;
+    //     border: 1px solid black;
+    // }
+}
+
+.front,
+.back {
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    backface-visibility: hidden;
+}
+
+.back {
+    transform: rotateY(180deg);
+}
+
+.disabled {
+    cursor: auto;
+}
+
+.flip {
+    transform: rotateY(180deg);
+}
+
+.matched {
+    background-color: #FBFBFB;
+    border-color: #FBFBFB;
+}
+
+.impossible {
+    width: 70px;
+    height: 70px;
+}
+
+
+
+.invisible {
+    visibility: hidden;
+    /* width: 100px; */
+    /* height: 100px; */
+    /* border: 1px solid transparent; */
+    margin: 11px;
+}
+
+.final {
+    position: absolute;
+    top: 50%;
+    z-index: 2;
+    border: 3px solid black;
+    background: gold;
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.header {
+    width: 100%;
+    padding: 10px 20px;
+}
+
+.header__firstRow {
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.logo {
+    margin-top: 10px;
+    box-shadow: blue 0px 0px 0px 2px inset,
+        // rgb(255, 255, 255) -4px -4px 0px -3px,
+        rgb(31, 193, 27) -4px -2px,
+        // rgb(255, 255, 255) -8px -6px 0px -3px,
+        rgb(255, 217, 19) -8px -4px,
+        // rgb(255, 255, 255) -12px -8px 0px -3px,
+        rgb(255, 156, 85) -12px -6px,
+        // rgb(255, 255, 255) -16px -10px 0px -3px,
+        rgb(255, 85, 85) -16px -8px;
+
+    &__header {
+        padding: 8px;
+        font-family: $codystar;
+        font-family: $bungee;
+        font-family: $bungee-hairline;
+        font-size: 40px;
+        color: white;
+        // background: rgb(247,3,3);
+        background: linear-gradient(90deg, rgba(247, 3, 3, 1) 0%, rgba(255, 160, 0, 1) 10%, rgba(255, 254, 0, 1) 20%, rgba(6, 252, 7, 1) 30%, rgba(2, 255, 225, 1) 40%, rgba(4, 82, 255, 1) 50%, rgba(34, 3, 255, 1) 60%, rgba(212, 2, 255, 1) 70%, rgba(255, 1, 153, 1) 80%, rgba(255, 1, 98, 1) 90%);
+        background-clip: text;
+        color: transparent;
+    }
+
+}
+
+// .logo__memo {
+//     font-family: $codystar;
+// }
+
+// .logo__chromatic {
+//     font-family: 'Racing Sans One', cursive;
+//     font-family: 'Sarina', cursive;
+//     background: linear-gradient(90deg, rgba(255, 0, 0, 1) 0%, rgba(204, 255, 0, 1) 25%, rgba(0, 255, 147, 1) 50%, rgba(36, 0, 255, 1) 75%, rgba(255, 0, 200, 1) 100%);
+//     background: linear-gradient(90deg, rgba(255, 0, 0, 1) 0%, rgba(207, 213, 16, 1) 25%, rgba(18, 209, 193, 1) 50%, rgba(48, 21, 212, 1) 75%, rgba(255, 0, 200, 1) 100%);
+//     background-clip: text;
+//     color: transparent;
+// }
+
+.header__settings {
+    position: absolute;
+    top: 20px;
+    right: 50px;
+    outline: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.header__restart {
+    position: absolute;
+    top: 20px;
+    right: 130px;
+    outline: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.header__newGame {
+    position: absolute;
+    top: 20px;
+    right: 90px;
+    outline: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.header__secondRow {
+    display: flex;
+    justify-content: center;
+}
+
+.scoreValue {
+    display: inline-block;
+    width: 55px;
+}
+
+svg {
+    width: 25px;
+}
+
+.settings {
+    position: absolute;
+    top: calc((100vh - 704px)/2);
+    z-index: 15;
+    background-color: #3d3d3d;
+    padding: 40px 20px;
+    border: 2px solid #888;
+    color: #fff;
+}
+
+.settings__header {
+    text-align: center;
+}
+
+.settings__note {
+    text-align: center;
+}
+
+.settings__close {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+fieldset {
+    margin-bottom: 10px;
+}
+
+legend {
+    text-align: center;
+}
+
+/* 
+light - #fbfbfb
+dark - #141415
+neutral - #3d3d3d || #888
+neutral border for 3d3d3d is 858585 || 7a7a7a
+
+*/
