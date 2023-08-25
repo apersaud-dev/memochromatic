@@ -6,6 +6,7 @@ import Settings from './screens/Settings';
 import * as func from './helperFunctions';
 import Game from './screens/Game';
 import { ITile } from './interfaces';
+import Instructions from './screens/Instructions';
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
   const [colourScheme, setColourScheme] = useState("square");
   const [impossibleMode, setImpossibleMode] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
+  const [showInstructions, setShowInstrucctions] = useState(false);
   const [tiles, setTiles] = useState<ITile[]>([]);
   const [score, setScore] = useState([0])
   const [turnCounter, setTurnCounter] = useState(0);
@@ -84,8 +86,11 @@ function App() {
 
   return (
     <div className="App">
+      <Instructions open={showInstructions} close={setShowInstrucctions} />
       <Header
         score={score}
+        instructionsOpen={showInstructions}
+        toggleInstructions={setShowInstrucctions}
         settingsOpen={showSettings}
         restart={restartGame}
         newGame={playAgain}
