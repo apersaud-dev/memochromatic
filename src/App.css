@@ -142,22 +142,30 @@ https://fonts.google.com/specimen/Poiret+One?preview.text=MemoChromatic%20memoch
 .logo {
   margin-top: 10px;
   box-shadow: blue 0px 0px 0px 2px inset, #1fc11b -4px -2px, #ffd913 -8px -4px, #ff9c55 -12px -6px, #ff5555 -16px -8px; }
-
-.logo__header {
-  padding: 8px;
-  font-family: "Codystar", cursive;
-  font-family: "Bungee Outline", cursive;
-  font-family: "Bungee Hairline", cursive;
-  font-size: 40px;
-  color: white;
-  background: linear-gradient(90deg, #f70303 0%, #ffa000 10%, #fffe00 20%, #06fc07 30%, #02ffe1 40%, #0452ff 50%, #2203ff 60%, #d402ff 70%, #ff0199 80%, #ff0162 90%);
-  background-clip: text;
-  color: transparent; }
+  .logo__header {
+    padding: 8px;
+    font-family: "Codystar", cursive;
+    font-family: "Bungee Outline", cursive;
+    font-family: "Bungee Hairline", cursive;
+    font-size: 40px;
+    color: white;
+    background: linear-gradient(90deg, #f70303 0%, #ffa000 10%, #fffe00 20%, #06fc07 30%, #02ffe1 40%, #0452ff 50%, #2203ff 60%, #d402ff 70%, #ff0199 80%, #ff0162 90%);
+    background-clip: text;
+    color: transparent; }
 
 .header__settings {
   position: absolute;
   top: 20px;
   right: 50px;
+  outline: none;
+  border: none;
+  background: none;
+  cursor: pointer; }
+
+.header__newGame {
+  position: absolute;
+  top: 20px;
+  right: 90px;
   outline: none;
   border: none;
   background: none;
@@ -172,10 +180,10 @@ https://fonts.google.com/specimen/Poiret+One?preview.text=MemoChromatic%20memoch
   background: none;
   cursor: pointer; }
 
-.header__newGame {
+.header__instructions {
   position: absolute;
   top: 20px;
-  right: 90px;
+  right: 170px;
   outline: none;
   border: none;
   background: none;
@@ -217,6 +225,34 @@ fieldset {
 
 legend {
   text-align: center; }
+
+.instructions {
+  z-index: 3;
+  position: absolute;
+  top: 50%;
+  border: 3px solid black;
+  background: greenyellow;
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+  .instructions__close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: none;
+    cursor: pointer; }
+
+.example {
+  display: flex;
+  margin: 5px 0; }
+
+.sq {
+  width: 20px;
+  height: 20px;
+  border: 1px solid black;
+  margin-right: 5px; }
 
 /* 
 light - #fbfbfb

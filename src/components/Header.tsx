@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Score } from './Score';
 
-const Header = ({ score, settingsOpen, restart, newGame, toggleSettings }: { score: number[], settingsOpen: boolean, restart: any, newGame: any, toggleSettings: any }) => {
+const Header = ({ score, settingsOpen, restart, newGame, toggleSettings, instructionsOpen, toggleInstructions }: { score: number[], settingsOpen: boolean, restart: any, newGame: any, toggleSettings: any, instructionsOpen: any, toggleInstructions: any }) => {
 
     const handleClick = (evt: React.MouseEvent<HTMLButtonElement>): void => {
         evt.preventDefault();
@@ -11,12 +11,25 @@ const Header = ({ score, settingsOpen, restart, newGame, toggleSettings }: { sco
             toggleSettings(true);
     }
 
+    const openModal = (evt: React.MouseEvent<HTMLButtonElement>, mnodalState: any, setModalState: any): void => {
+        evt.preventDefault();
+        if (mnodalState)
+            setModalState(false);
+        else
+            setModalState(true);
+    }
+
     return (
         <div className="header">
             <div className="header__firstRow">
                 <div className="logo">
                     <h1 className="logo__header">MemoChromatic</h1>
                 </div>
+                <button className="header__instructions" type="button" onClick={(evt) => openModal(evt, instructionsOpen, toggleInstructions)}>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                        <path d="M256 512a256 256 0 1 0 0-512 256 256 0 1 0 0 512zm-40-176h24v-64h-24c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-80c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z" />
+                    </svg>
+                </button>
                 <button className="header__restart" type="button" onClick={restart}>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                         <path d="M48.5 224H40c-13.3 0-24-10.7-24-24V72c0-9.7 5.8-18.5 14.8-22.2S50.1 48.1 57 55l41.6 41.6c87.6-86.5 228.7-86.2 315.8 1 87.5 87.5 87.5 229.3 0 316.8s-229.3 87.5-316.8 0c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0c62.5 62.5 163.8 62.5 226.3 0s62.5-163.8 0-226.3c-62.2-62.2-162.7-62.5-225.3-1L185 183c6.9 6.9 8.9 17.2 5.2 26.2S177.7 224 168 224H48.5z" />
