@@ -1,12 +1,12 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import Example from "../components/Example";
 
-interface IInstructions {
+interface IInstructionsProps {
     open: boolean;
     close: Dispatch<SetStateAction<boolean>>;
 }
 
-const Instructions: React.FC<IInstructions> = ({ open, close }) => {
+const Instructions: React.FC<IInstructionsProps> = ({ open, close }) => {
 
     if (!open) {
         return null;

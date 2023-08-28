@@ -1,14 +1,14 @@
 import React from 'react';
 import { totalScore } from '../helperFunctions';
 
-interface IGameOver {
+interface IGameOverProps {
     show: boolean;
     playAgain: () => void;
     score: number[];
 }
 
 
-export const GameOver: React.FC<IGameOver> = ({ show, playAgain, score }: IGameOver) => {
+export const GameOver: React.FC<IGameOverProps> = ({ show, playAgain, score }) => {
 
     const calculatedScore = totalScore(score);
 

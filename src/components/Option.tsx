@@ -9,7 +9,7 @@ interface IData {
 interface IOptionProps {
     data: IData;
     checked: boolean;
-    updateStateFunc: Dispatch<SetStateAction<boolean>>;
+    updateStateFunc: Dispatch<SetStateAction<any>>;
     disabled?: boolean;
 }
 
