@@ -18,7 +18,7 @@ function App() {
   const [tiles, setTiles] = useState<ITile[]>([]);
   const [score, setScore] = useState([0])
   const [turnCounter, setTurnCounter] = useState(0);
-  const [selectedTiles, setSelectedTiles] = useState<string[]>([]);
+  const [selectedTiles, setSelectedTiles] = useState<number[]>([]);
   const [matched, setMatched] = useState([]);
   const [gameCompleted, setGameCompleted] = useState(false);
   const { height, width } = func.useWindowDimensions();
@@ -28,7 +28,7 @@ function App() {
     setTurnCounter(turnCounter + 1);
   }
 
-  const updateSelectedTiles = (tileId: string) => {
+  const updateSelectedTiles = (tileId: number) => {
     setSelectedTiles([...selectedTiles, tileId]);
   }
 
