@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { Score } from './Score';
 
 interface IHeaderProps {
@@ -21,9 +21,9 @@ const Header: React.FC<IHeaderProps> = ({ score, settingsOpen, restart, newGame,
             toggleSettings(true);
     }
 
-    const openModal = (evt: React.MouseEvent<HTMLButtonElement>, mnodalState: any, setModalState: any): void => {
+    const openModal = (evt: React.MouseEvent<HTMLButtonElement>, modalState: any, setModalState: any): void => {
         evt.preventDefault();
-        if (mnodalState)
+        if (modalState)
             setModalState(false);
         else
             setModalState(true);
