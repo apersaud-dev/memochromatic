@@ -236,31 +236,31 @@ const Settings = ({ columns, colourScheme, impossibleMode, startImpossibleMode, 
         return null;
     }
 
-    const handleInputChange = (value: string | boolean, state: any) => {
-        // How can I set the value of the input/radio to a number instead of a string?
-        let input;
-        switch (value) {
-            case "5":
-                input = 5;
-                break;
-            case "6":
-                input = 6;
-                break;
-            case "7":
-                input = 7;
-                break;
-            case 'true':
-                input = true;
-                break;
-            case 'false':
-                input = false;
-                break;
-            default:
-                input = value;
-                break;
-        }
-        state(input);
-    }
+    // const handleInputChange = (value: string | boolean, state: any) => {
+    //     // How can I set the value of the input/radio to a number instead of a string?
+    //     let input;
+    //     switch (value) {
+    //         case "5":
+    //             input = 5;
+    //             break;
+    //         case "6":
+    //             input = 6;
+    //             break;
+    //         case "7":
+    //             input = 7;
+    //             break;
+    //         case 'true':
+    //             input = true;
+    //             break;
+    //         case 'false':
+    //             input = false;
+    //             break;
+    //         default:
+    //             input = value;
+    //             break;
+    //     }
+    //     state(input);
+    // }
 
     const disableTiles = colourSelection === "split-complementary" || colourSelection === "triadic" || colourSelection === "analogous" ? true : false;
 
