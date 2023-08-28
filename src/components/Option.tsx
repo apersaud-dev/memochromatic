@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 
-interface IOption {
-    data: any;
-    checked: any;
-    updateStateFunc: any;
-    disabled?: any;
+interface IData {
+    id: string;
+    name: string;
+    value: string | number;
 }
 
-const Option = ({ data, checked, updateStateFunc, disabled }: IOption) => {
+interface IOptionProps {
+    data: IData;
+    checked: boolean;
+    updateStateFunc: Dispatch<SetStateAction<boolean>>;
+    disabled?: boolean;
+}
+
+const Option: React.FC<IOptionProps> = ({ data, checked, updateStateFunc, disabled }) => {
 
     const labelOutput = typeof (data.value) === "number" ? data.value * 4 : data.value;
     const value = data.value;
@@ -39,22 +45,38 @@ const Option = ({ data, checked, updateStateFunc, disabled }: IOption) => {
         state(input);
     }
 
-    // Fix disabled state so it works for all inputs
+    if (data.value === 6) {
+        return (
+            <>
+                <input
+                    id={data.id}
+                    type="radio"
+                    name={data.name}
+                    value={data.value}
+                    checked={checked}
+                    onChange={(evt) => { handleInputChange(evt.target.value, updateStateFunc) }}
+                />
+                <label htmlFor={data.id} >{labelOutput}</label>
+            </>
+        )
+    } else {
+        return (
+            <>
+                <input
+                    id={data.id}
+                    type="radio"
+                    name={data.name}
+                    value={data.value}
+                    checked={checked}
+                    onChange={(evt) => { handleInputChange(evt.target.value, updateStateFunc) }}
+                    disabled={disabled}
+                />
+                <label htmlFor={data.id} >{labelOutput}</label>
+            </>
+        )
+    }
 
-    return (
-        <>
-            <input
-                id={data.id}
-                type="radio"
-                name={data.name}
-                value={data.value}
-                checked={checked}
-                onChange={(evt) => { handleInputChange(evt.target.value, updateStateFunc) }}
-                disabled={disabled}
-            />
-            <label htmlFor={data.id} >{labelOutput}</label>
-        </>
-    )
+
 }
 
 export default Option;
