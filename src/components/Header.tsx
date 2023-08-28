@@ -1,7 +1,17 @@
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import { Score } from './Score';
 
-const Header = ({ score, settingsOpen, restart, newGame, toggleSettings, instructionsOpen, toggleInstructions }: { score: number[], settingsOpen: boolean, restart: any, newGame: any, toggleSettings: any, instructionsOpen: any, toggleInstructions: any }) => {
+interface IHeaderProps {
+    score: number[];
+    settingsOpen: boolean;
+    restart: () => void;
+    newGame: () => void;
+    toggleSettings: Dispatch<SetStateAction<boolean>>;
+    instructionsOpen: boolean;
+    toggleInstructions: Dispatch<SetStateAction<boolean>>;
+}
+
+const Header: React.FC<IHeaderProps> = ({ score, settingsOpen, restart, newGame, toggleSettings, instructionsOpen, toggleInstructions }) => {
 
     const handleClick = (evt: React.MouseEvent<HTMLButtonElement>): void => {
         evt.preventDefault();
