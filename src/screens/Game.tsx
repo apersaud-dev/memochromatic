@@ -30,7 +30,7 @@ const Game: React.FC<IGameProps> = ({ tiles, updateSelectedTiles, impossibleMode
         styleClass["transform"] = `rotateZ(${degrees}deg)`;
         styleClass["transition"] = "all 1s";
     }
-
+    console.log(tiles);
     return (
         <div className="board">
             <div className="gridRow" style={styleClass}>
