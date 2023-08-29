@@ -21,7 +21,7 @@ const Header: React.FC<IHeaderProps> = ({ score, settingsOpen, restart, newGame,
             toggleSettings(true);
     }
 
-    const openModal = (evt: React.MouseEvent<HTMLButtonElement>, modalState: any, setModalState: any): void => {
+    const openModal = (evt: React.MouseEvent<HTMLButtonElement>, modalState: boolean, setModalState: Dispatch<SetStateAction<boolean>>): void => {
         evt.preventDefault();
         if (modalState)
             setModalState(false);
