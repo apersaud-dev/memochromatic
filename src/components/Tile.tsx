@@ -1,6 +1,18 @@
 import React from "react";
+import { IBoxDimensions } from "../interfaces";
 
-const Tile = ({ id, updateTurnCounter, colour, selectedTiles, updateSelectedTiles, matched, boxDim, impossibleMode }: { id: any, updateTurnCounter: any, colour: any, selectedTiles: any, updateSelectedTiles: any, matched: any, boxDim: any, impossibleMode: any }) => {
+interface ITileProps {
+    id: number;
+    updateTurnCounter: () => void;
+    colour: string;
+    selectedTiles: number[];
+    updateSelectedTiles: (tileId: number) => void;
+    matched: number[];
+    boxDim: IBoxDimensions;
+    impossibleMode: boolean;
+}
+
+const Tile: React.FC<ITileProps> = ({ id, updateTurnCounter, colour, selectedTiles, updateSelectedTiles, matched, boxDim, impossibleMode }) => {
 
     const tileStyle = {
         background: colour,
@@ -43,7 +55,7 @@ const Tile = ({ id, updateTurnCounter, colour, selectedTiles, updateSelectedTile
     }
 
     return (
-        <button id={id} className={tile} style={{ width: `${boxDim.length}px`, height: `${boxDim.length}px`, margin: `${boxDim.margin}px` }} onClick={evt => clickTile(evt)} disabled={disableClick}>
+        <button id={`${id}`} className={tile} style={{ width: `${boxDim.length}px`, height: `${boxDim.length}px`, margin: `${boxDim.margin}px` }} onClick={evt => clickTile(evt)} disabled={disableClick}>
             <div className={tileBack} style={tileStyle}></div>
         </button>
     )

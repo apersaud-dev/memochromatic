@@ -1,8 +1,11 @@
 import React from "react";
 import { totalScore } from "../helperFunctions";
 
+interface IScoreProps {
+    score: number[]
+}
 
-export const Score = ({ score }: { score: number[] }) => {
+export const Score: React.FC<IScoreProps> = ({ score }) => {
 
     const calculatedScore = totalScore(score);
 

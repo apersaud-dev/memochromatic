@@ -1,13 +1,13 @@
-import { useState, useEffect, SetStateAction } from 'react';
-import { ITile } from "./interfaces";
+import { useState, useEffect, Dispatch, SetStateAction } from 'react';
+import { IBoxDimensions, ITile } from "./interfaces";
 
 export const totalScore = (inputArray: number[]) => {
     return inputArray.reduce((previousValue: number, currentValue: number) => previousValue + currentValue, 0);
 }
 
-export const gameStart = (numOfColumns: number, selectTile: React.Dispatch<SetStateAction<ITile[]>>): void => {
+export const gameStart = (numOfColumns: number, setTile: React.Dispatch<SetStateAction<ITile[]>>): void => {
     const newGameTiles = buildGrid(numOfColumns);
-    selectTile(generateRandomPairs(numOfColumns, newGameTiles))
+    setTile(generateRandomPairs(numOfColumns, newGameTiles))
 }
 
 export const buildGrid = (int: number): string[] => {
@@ -26,7 +26,7 @@ export const buildGrid = (int: number): string[] => {
 };
 
 export const createTilesArray = (int: number): string[] => {
-    const tiles = [];
+    const tiles: string[] = [];
 
     // can replace the nested for loop with a single loop + use uuid instead of r#c# syntax for tiles
     for (let i = 0; i < 4; i++) {
@@ -38,13 +38,13 @@ export const createTilesArray = (int: number): string[] => {
     return tiles;
 };
 
-export const generateRandomPairs = (columnsState: any, gameTiles: any, colourChoice = 'square') => {
+export const generateRandomPairs = (columnsState: number, gameTiles: string[], colourChoice = 'square') => {
     const initialTiles = [...gameTiles];
-    const finalTiles: any = [];
+    const finalTiles: ITile[] = [];
 
     const shuffledTiles = shuffleArray(initialTiles);
-    const arr1 = [];
-    const arr2 = [];
+    const arr1: string[] = [];
+    const arr2: string[] = [];
 
     for (let a = 0; a < shuffledTiles.length / 2; a++) {
         arr1.push(shuffledTiles[a]);
@@ -56,7 +56,8 @@ export const generateRandomPairs = (columnsState: any, gameTiles: any, colourCho
     const gameColours = generateColours(colourChoice, columnsState * 4);
 
     randomizePairs(arr1, arr2, gameColours, finalTiles);
-    finalTiles.sort((a: any, b: any) => (a.tile > b.tile ? 1 : -1));
+    finalTiles.sort((a: ITile, b: ITile) => (a.tile > b.tile ? 1 : -1));
+    console.log("finalTiles");
     console.log(finalTiles);
     return finalTiles;
 };
@@ -72,13 +73,13 @@ export const rotations = (a: number, b: number) => {
     return a + b;
 };
 
-export const gameOver = (updateGameOverState: any) => {
+export const gameOver = (updateGameOverState: Dispatch<SetStateAction<boolean>>) => {
     setTimeout(() => {
         updateGameOverState(true);
     }, 500);
 }
 
-export const gameLogic = (gameTiles: any, selectedTiles: any, updateSelectedTiles: any, matchedTiles: any, updateMatchedTiles: any, currentScore: any, updateScore: any, updateTurnCount: any) => {
+export const gameLogic = (gameTiles: ITile[], selectedTiles: number[], updateSelectedTiles: Dispatch<SetStateAction<number[]>>, matchedTiles: number[], updateMatchedTiles: Dispatch<SetStateAction<number[]>>, currentScore: number[], updateScore: Dispatch<SetStateAction<number[]>>, updateTurnCount: Dispatch<SetStateAction<number>>) => {
     setTimeout(() => {
         if (checkForMatch(gameTiles, selectedTiles)) {
             updateMatchedTiles([...matchedTiles, ...selectedTiles]);
@@ -93,59 +94,59 @@ export const gameLogic = (gameTiles: any, selectedTiles: any, updateSelectedTile
     }, 1500);
 }
 
-export const gameEngine = (columnsState: any, tilesState: any, turnState: any, selectedTilesState: any, matchedState: any, scoreState: any, updateTilesState: any, updateTurnState: any, updateMatchedState: any, updateScoreState: any, updateGameOver: any) => {
-    // determine how and when to load preferences from localStorage - probably should have a separate function to run that code, but need to do some type of check to gate the function
+// const gameEngine = (columnsState: any, tilesState: any, turnState: any, selectedTilesState: any, matchedState: any, scoreState: any, updateTilesState: any, updateTurnState: any, updateMatchedState: any, updateScoreState: any, updateGameOver: any) => {
+//     // determine how and when to load preferences from localStorage - probably should have a separate function to run that code, but need to do some type of check to gate the function
 
 
-    // determine how to start a new game
-    // if tiles array is empty, then the tiles haven't been built and the game hasn't startd
-    if (tilesState.length === 0) {
-        const newGameTiles = buildGrid(columnsState);
-        updateTilesState(generateRandomPairs(columnsState, newGameTiles));
-    }
+//     // determine how to start a new game
+//     // if tiles array is empty, then the tiles haven't been built and the game hasn't startd
+//     if (tilesState.length === 0) {
+//         const newGameTiles = buildGrid(columnsState);
+//         updateTilesState(generateRandomPairs(columnsState, newGameTiles));
+//     }
 
-    // determine how to evaluate what to do after the first selection
-    // determine how to evaluate what to do after second selection
-    if (turnState > 1) {
-        setTimeout(() => {
-            if (checkForMatch(tilesState, selectedTilesState)) {
-                updateMatchedState([...matchedState, ...selectedTilesState]);
-                const newScore = [...scoreState, 100];
-                updateScoreState(newScore);
-            } else {
-                const newScore = [...scoreState, -10];
-                updateScoreState(newScore);
-            }
-            updateTurnState(0);
-            updateTilesState([]);
-        }, 1500);
-    }
+//     // determine how to evaluate what to do after the first selection
+//     // determine how to evaluate what to do after second selection
+//     if (turnState > 1) {
+//         setTimeout(() => {
+//             if (checkForMatch(tilesState, selectedTilesState)) {
+//                 updateMatchedState([...matchedState, ...selectedTilesState]);
+//                 const newScore = [...scoreState, 100];
+//                 updateScoreState(newScore);
+//             } else {
+//                 const newScore = [...scoreState, -10];
+//                 updateScoreState(newScore);
+//             }
+//             updateTurnState(0);
+//             updateTilesState([]);
+//         }, 1500);
+//     }
 
-    // determine if the game is over
-    if (tilesState.length > 0 && matchedState.length === tilesState.length) {
+//     // determine if the game is over
+//     if (tilesState.length > 0 && matchedState.length === tilesState.length) {
 
-        // should memorize or check if stored data has changed before saving/overwriting it
-        // const calculatedScore = score.reduce((previousValue, currentValue) => previousValue + currentValue);
+//         // should memorize or check if stored data has changed before saving/overwriting it
+//         // const calculatedScore = score.reduce((previousValue, currentValue) => previousValue + currentValue);
 
-        // const info = {
-        // // possibly make this an array of top 3 or 5 high scores
-        //   highScore: calculatedScore,
-        //   columns: columns,
-        //   colourScheme: colourScheme
-        // };
+//         // const info = {
+//         // // possibly make this an array of top 3 or 5 high scores
+//         //   highScore: calculatedScore,
+//         //   columns: columns,
+//         //   colourScheme: colourScheme
+//         // };
 
-        // window.localStorage.setItem('gameData', JSON.stringify(info));
+//         // window.localStorage.setItem('gameData', JSON.stringify(info));
 
-        setTimeout(() => {
-            updateGameOver(true);
-        }, 500);
-    }
-};
+//         setTimeout(() => {
+//             updateGameOver(true);
+//         }, 500);
+//     }
+// };
 
-const shuffleArray = (tilesArray: any) => {
+const shuffleArray = (tilesArray: string[]) => {
     const copyOfArray = [...tilesArray];
 
-    const shuffledArray = [];
+    const shuffledArray: string[] = [];
     let i = tilesArray.length;
 
     while (i--) {
@@ -157,12 +158,12 @@ const shuffleArray = (tilesArray: any) => {
     return shuffledArray;
 };
 
-const randomizePairs = (arr1: any, arr2: any, colourArray: any, resultArray: any) => {
+const randomizePairs = (arr1: string[], arr2: string[], colourArray: string[], resultArray: ITile[]) => {
     let i = arr1.length;
 
     while (i--) {
-        const pair1 = { tile: "", pair: "", colour: "" };
-        const pair2 = { tile: "", pair: "", colour: "" };
+        const pair1: ITile = { tile: "", pair: 0, colour: "" };
+        const pair2: ITile = { tile: "", pair: 0, colour: "" };
         let randomIndex1 = Math.floor(Math.random() * (i + 1));
         let randomIndex2 = Math.floor(Math.random() * (i + 1));
         // resultObject[arr1[randomIndex1]] = i;
@@ -183,14 +184,14 @@ const randomizePairs = (arr1: any, arr2: any, colourArray: any, resultArray: any
     return resultArray;
 };
 
-export const checkForMatch = (tilesState: any, selectedTilesState: any) => {
+const checkForMatch = (tilesState: ITile[], selectedTilesState: number[]) => {
     if (tilesState[selectedTilesState[0]]["pair"] === tilesState[selectedTilesState[1]]["pair"])
         return true;
     return false;
 };
 
-const generateMonochromaticScheme = (numOfTiles: any) => {
-    const colours = [];
+const generateMonochromaticScheme = (numOfTiles: number) => {
+    const colours: string[] = [];
     const numOfColours = numOfTiles / 2;
     const hue = Math.floor(Math.random() * 361);
 
@@ -207,8 +208,8 @@ const generateMonochromaticScheme = (numOfTiles: any) => {
     return colours;
 }
 
-const generateComplementaryColours = (numOfTiles: any) => {
-    const colours = [];
+const generateComplementaryColours = (numOfTiles: number) => {
+    const colours: string[] = [];
     const numOfColours = numOfTiles / 4;
     const hueOne = Math.floor(Math.random() * 361);
     let hueTwo = hueOne + 180;
@@ -235,8 +236,8 @@ const generateComplementaryColours = (numOfTiles: any) => {
     return colours;
 }
 
-const generateThreeColours = (numOfTiles: any, style: any) => {
-    const colours = [];
+const generateThreeColours = (numOfTiles: number, style: string) => {
+    const colours: string[] = [];
     const numOfColours = numOfTiles / 3;
     const hueOne = Math.floor(Math.random() * 361);
     let change = 0;
@@ -281,8 +282,8 @@ const generateThreeColours = (numOfTiles: any, style: any) => {
     return colours;
 }
 
-const generateFourColours = (numOfTiles: any, style: any) => {
-    const colours = [];
+const generateFourColours = (numOfTiles: number, style: string) => {
+    const colours: string[] = [];
     const numOfColours = numOfTiles / 4;
     const hueOne = Math.floor(Math.random() * 361);
     let hueTwo = 0;
@@ -321,14 +322,14 @@ const generateFourColours = (numOfTiles: any, style: any) => {
     return colours;
 }
 
-const generateRandomWithinRange = (min: any, max: any) => {
+const generateRandomWithinRange = (min: number, max: number) => {
     const difference = max - min + 1;
     const value = Math.floor(Math.random() * difference) + min;
     return value;
 }
 
-export const generateColours = (style: any, tiles: any) => {
-    let gameColours;
+export const generateColours = (style: string, tiles: number) => {
+    let gameColours: string[];
 
     if (style === "tetradic" || style === "square") {
         gameColours = generateFourColours(tiles, style);
@@ -371,12 +372,7 @@ export function useWindowDimensions() {
 // https://stackoverflow.com/questions/12710905/how-do-i-dynamically-assign-properties-to-an-object-in-typescript
 // https://stackoverflow.com/questions/12710905/how-do-i-dynamically-assign-properties-to-an-object-in-typescript/54445030#54445030
 
-interface IBoxDimensions {
-    length: number;
-    margin: number;
-}
-
-export const defineBoxDim = (width: any, impMode: any) => {
+export const defineBoxDim = (width: number, impMode: boolean) => {
     let boxDim: IBoxDimensions = { length: 0, margin: 0 };
 
     if (!impMode) {
@@ -413,8 +409,8 @@ export const defineBoxDim = (width: any, impMode: any) => {
     return boxDim;
 }
 
-export const defineBoardWidth = (width: any, columns: any, impMode: any) => {
-    let gridWidth;
+export const defineBoardWidth = (width: number, columns: number, impMode: boolean) => {
+    let gridWidth: number;
 
     if (impMode) {
         gridWidth = 468;
@@ -428,6 +424,31 @@ export const defineBoardWidth = (width: any, columns: any, impMode: any) => {
     return gridWidth;
 }
 
+export const handleInputChange = (value: string | number, state: any) => {
+    // How can I set the value of the input/radio to a number instead of a string?
+    let input: number | string | boolean;
+    switch (value) {
+        case "5":
+            input = 5;
+            break;
+        case "6":
+            input = 6;
+            break;
+        case "7":
+            input = 7;
+            break;
+        case 'true':
+            input = true;
+            break;
+        case 'false':
+            input = false;
+            break;
+        default:
+            input = value;
+            break;
+    }
+    state(input);
+}
 
 
 /*

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { ITile } from '../interfaces';
+import React from 'react';
+import { IBoxDimensions, ITile } from '../interfaces';
 import Tile from '../components/Tile';
 import * as func from '../helperFunctions';
 
@@ -9,8 +9,19 @@ interface IStyleClass {
     transition?: string;
 }
 
+interface IGameProps {
+    tiles: ITile[];
+    updateSelectedTiles: (tileId: number) => void;
+    impossibleMode: boolean;
+    selectedTiles: number[];
+    updateTurnCounter: () => void;
+    matched: number[];
+    score: number[];
+    boardWidth: number;
+    boxDim: IBoxDimensions;
+}
 
-const Game = ({ tiles, updateSelectedTiles, impossibleMode, selectedTiles, updateTurnCounter, matched, score, boardWidth, boxDim }: { tiles: ITile[], updateSelectedTiles: any, impossibleMode: boolean, selectedTiles: any, updateTurnCounter: any, matched: any, score: any, boardWidth: any, boxDim: any }) => {
+const Game: React.FC<IGameProps> = ({ tiles, updateSelectedTiles, impossibleMode, selectedTiles, updateTurnCounter, matched, score, boardWidth, boxDim }) => {
 
     const styleClass: IStyleClass = { width: `${boardWidth}px` }
 
@@ -19,7 +30,7 @@ const Game = ({ tiles, updateSelectedTiles, impossibleMode, selectedTiles, updat
         styleClass["transform"] = `rotateZ(${degrees}deg)`;
         styleClass["transition"] = "all 1s";
     }
-
+    console.log(tiles);
     return (
         <div className="board">
             <div className="gridRow" style={styleClass}>

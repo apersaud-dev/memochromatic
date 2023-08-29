@@ -1,60 +1,53 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
+import { handleInputChange } from '../helperFunctions';
 
-interface IOption {
-    data: any;
-    checked: any;
-    updateStateFunc: any;
-    disabled?: any;
+interface IData {
+    id: string;
+    name: string;
+    value: string | number;
 }
 
-const Option = ({ data, checked, updateStateFunc, disabled }: IOption) => {
+interface IOptionProps {
+    data: IData;
+    checked: boolean;
+    updateStateFunc: Dispatch<SetStateAction<number>> | Dispatch<SetStateAction<string>>;
+    disabled?: boolean;
+}
+
+const Option: React.FC<IOptionProps> = ({ data, checked, updateStateFunc, disabled }) => {
 
     const labelOutput = typeof (data.value) === "number" ? data.value * 4 : data.value;
-    const value = data.value;
-    console.log(typeof value);
 
-    const handleInputChange = (value: string | boolean, state: any) => {
-        // How can I set the value of the input/radio to a number instead of a string?
-        let input;
-        switch (value) {
-            case "5":
-                input = 5;
-                break;
-            case "6":
-                input = 6;
-                break;
-            case "7":
-                input = 7;
-                break;
-            case 'true':
-                input = true;
-                break;
-            case 'false':
-                input = false;
-                break;
-            default:
-                input = value;
-                break;
-        }
-        state(input);
+    if (data.value === 6) {
+        return (
+            <>
+                <input
+                    id={data.id}
+                    type="radio"
+                    name={data.name}
+                    value={data.value}
+                    checked={checked}
+                    onChange={(evt) => { handleInputChange(evt.target.value, updateStateFunc) }}
+                />
+                <label htmlFor={data.id} >{labelOutput}</label>
+            </>
+        )
+    } else {
+        return (
+            <>
+                <input
+                    id={data.id}
+                    type="radio"
+                    name={data.name}
+                    value={data.value}
+                    checked={checked}
+                    onChange={(evt) => { handleInputChange(evt.target.value, updateStateFunc) }}
+                    disabled={disabled}
+                />
+                <label htmlFor={data.id} >{labelOutput}</label>
+            </>
+        )
     }
-
-    // Fix disabled state so it works for all inputs
-
-    return (
-        <>
-            <input
-                id={data.id}
-                type="radio"
-                name={data.name}
-                value={data.value}
-                checked={checked}
-                onChange={(evt) => { handleInputChange(evt.target.value, updateStateFunc) }}
-                disabled={disabled}
-            />
-            <label htmlFor={data.id} >{labelOutput}</label>
-        </>
-    )
 }
 
 export default Option;

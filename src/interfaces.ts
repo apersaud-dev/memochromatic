@@ -8,14 +8,9 @@ TS & SASS https://stackoverflow.com/questions/55071266/how-to-use-react-with-typ
 */
 
 export interface ITile {
+    pair: number;
     tile: string;
     colour: string;
-}
-
-export interface IGameOver {
-    show: boolean;
-    playAgain: () => void;
-    score: number[];
 }
 
 export interface IOption {
@@ -23,4 +18,9 @@ export interface IOption {
     name: string;
     value: number | string;
     selection: number | string;
+}
+
+export interface IBoxDimensions {
+    length: number;
+    margin: number;
 }
