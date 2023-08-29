@@ -7,18 +7,10 @@ TS & SASS https://stackoverflow.com/questions/55071266/how-to-use-react-with-typ
 
 */
 
-import { NumberLiteralType } from "typescript";
-
 export interface ITile {
-    id: number;
+    pair: number;
     tile: string;
     colour: string;
-}
-
-export interface IGameOver {
-    show: boolean;
-    playAgain: () => void;
-    score: number[];
 }
 
 export interface IOption {
