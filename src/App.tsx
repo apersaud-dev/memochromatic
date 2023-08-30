@@ -115,6 +115,8 @@ function App() {
         open={showSettings}
         close={setShowSettings}
         updateSettings={updateSettings}
+        width={width}
+        height={height}
       />
       <GameOver show={gameCompleted} playAgain={playAgain} score={score} />
     </div>

@@ -11,9 +11,11 @@ interface ISettingsProps {
     updateSettings: (col: number, colour: string) => void;
     open: boolean;
     close: Dispatch<SetStateAction<boolean>>;
+    width: number;
+    height: number;
 }
 
-const Settings: React.FC<ISettingsProps> = ({ columns, colourScheme, impossibleMode, startImpossibleMode, updateSettings, open, close }) => {
+const Settings: React.FC<ISettingsProps> = ({ columns, colourScheme, impossibleMode, startImpossibleMode, updateSettings, open, close, width, height }) => {
 
     const [tilesSelection, setTilesSelection] = useState(columns);
     const [colourSelection, setColourSelection] = useState(colourScheme);
@@ -128,27 +130,31 @@ const Settings: React.FC<ISettingsProps> = ({ columns, colourScheme, impossibleM
                         })}
                     </div>
                 </fieldset>
-                <fieldset>
-                    <legend>Impossible Mode</legend>
-                    <input
-                        id="impossibleOff"
-                        type="radio"
-                        name="impossible"
-                        value="false"
-                        checked={difficulty === false}
-                        onChange={(e) => { handleInputChange(e.target.value, setDifficulty) }}
-                    />
-                    <label htmlFor="impossibleOff">Off</label>
-                    <input
-                        id="impossibleOn"
-                        type="radio"
-                        name="impossible"
-                        value="true"
-                        checked={difficulty === true}
-                        onChange={(e) => { handleInputChange(e.target.value, setDifficulty) }}
-                    />
-                    <label htmlFor="impossibleOn">On</label>
-                </fieldset>
+                {(width > 661 && height > 750) ?
+                    <fieldset>
+                        <legend>Impossible Mode</legend>
+                        <input
+                            id="impossibleOff"
+                            type="radio"
+                            name="impossible"
+                            value="false"
+                            checked={difficulty === false}
+                            onChange={(e) => { handleInputChange(e.target.value, setDifficulty) }}
+                        />
+                        <label htmlFor="impossibleOff">Off</label>
+                        <input
+                            id="impossibleOn"
+                            type="radio"
+                            name="impossible"
+                            value="true"
+                            checked={difficulty === true}
+                            onChange={(e) => { handleInputChange(e.target.value, setDifficulty) }}
+                        />
+                        <label htmlFor="impossibleOn">On</label>
+                    </fieldset>
+                    :
+                    null
+                }
                 <button type="submit" onClick={(e) => handleFormSubmit(e)}>Save</button>
                 <button type="button" onClick={() => resetButtonHandler()}>Reset</button>
             </form>
