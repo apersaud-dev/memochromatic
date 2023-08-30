@@ -22,10 +22,10 @@
     "start:js": "react-scripts start",
     "start": "npm-run-all -p watch:css start:js",
     "build:js": "react-scripts build",
-    "build:all": "npm-run-all build:*",
+    "build:all": "npm-run-all build:css build:js",
     "dev": "webpack",
     "develop": "webpack-dev-server --mode development",
-    "build": "react-scripts build",
+    "ogbuildcommand": "react-scripts build",
     "test": "react-scripts-ts test",
     "eject": "react-scripts-ts eject",
     "watch": "tsc -p . w"
