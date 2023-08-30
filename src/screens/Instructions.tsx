@@ -17,7 +17,7 @@ const Instructions: React.FC<IInstructionsProps> = ({ open, close }) => {
             <div>
                 <button className="instructions__close" type="button" onClick={() => close(false)}>X</button>
             </div>
-            <div>
+            <div className="instructions__section">
                 <h2 className="instructions__heading">How to Play</h2>
                 <div className="example">
                     <Example id={`q1w2e3`} time={4000} flipColour={"red"} startingColour={"#3d3d3d"} />
@@ -38,11 +38,11 @@ const Instructions: React.FC<IInstructionsProps> = ({ open, close }) => {
                     <p>Try to match all the pairs in as few guesses as possbile.</p>
                 </div>
             </div>
-            <div>
+            <div className="instructions__section">
                 <h2 className="instructions__heading">Scoring</h2>
                 <p>Your score will increase by 100 for each matched pair, and will reduce by 10 for each miss.</p>
             </div>
-            <div>
+            <div className="instructions__section">
                 <h2 className="instructions__heading">Settings</h2>
                 <p>Click the gear icon to adjust the number of tiles and colour schemes for the game.</p>
             </div>

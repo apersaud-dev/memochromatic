@@ -1,20 +1,20 @@
 @import './sass/_reset';
 @import './sass/_typography';
 
-:root {
-    background-color: #3d3d3d;
+// :root {
+//     background-color: #3d3d3d;
 
-    // @media (prefers-color-scheme: dark) {
-    //     background-color: #141415;
-    // }
+//     // @media (prefers-color-scheme: dark) {
+//     //     background-color: #141415;
+//     // }
 
-    // @media (prefers-color-scheme: light) {
-    //     background-color: #fbfbfb;
-    // }
-}
+//     // @media (prefers-color-scheme: light) {
+//     //     background-color: #fbfbfb;
+//     // }
+// }
 
 .App {
-    // background-color: #fbfbfb;
+    background-color: #fbfbfb;
     display: flex;
     flex-direction: column;
     /* justify-content: center; */
@@ -36,8 +36,10 @@
 }
 
 .box {
-    background-color: #3d3d3d;
-    border: 1px solid #8f8f8f;
+    // background-color: #3d3d3d;
+    // border: 1px solid #8f8f8f;
+    background-color: #fbfbfb;
+    border: 1px solid black;
     padding: 0;
 
     perspective: 300px;
@@ -87,38 +89,84 @@
     height: 70px;
 }
 
-
-
 .invisible {
     visibility: hidden;
-    /* width: 100px; */
-    /* height: 100px; */
-    /* border: 1px solid transparent; */
     margin: 11px;
 }
 
 .final {
     position: absolute;
     top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     z-index: 2;
     border: 3px solid black;
     background: gold;
-    padding: 10px 20px;
+    padding: 20px 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    * {
+        margin-bottom: 15px;
+    }
 }
 
 .header {
     width: 100%;
     padding: 10px 20px;
-}
 
-.header__firstRow {
-    display: flex;
-    justify-content: center;
-    position: relative;
+    &__firstRow {
+        display: flex;
+        justify-content: center;
+        position: relative;
+    }
+
+    &__settings {
+        position: absolute;
+        top: 20px;
+        right: 50px;
+        outline: none;
+        border: none;
+        background: none;
+        cursor: pointer;
+    }
+
+    &__newGame {
+        position: absolute;
+        top: 20px;
+        right: 90px;
+        outline: none;
+        border: none;
+        background: none;
+        cursor: pointer;
+    }
+
+    &__restart {
+        position: absolute;
+        top: 20px;
+        right: 130px;
+        outline: none;
+        border: none;
+        background: none;
+        cursor: pointer;
+    }
+
+    &__instructions {
+        position: absolute;
+        top: 20px;
+        right: 170px;
+        outline: none;
+        border: none;
+        background: none;
+        cursor: pointer;
+    }
+
+    &__secondRow {
+        display: flex;
+        justify-content: center;
+    }
 }
 
 .logo {
@@ -148,64 +196,6 @@
 
 }
 
-// .logo__memo {
-//     font-family: $codystar;
-// }
-
-// .logo__chromatic {
-//     font-family: 'Racing Sans One', cursive;
-//     font-family: 'Sarina', cursive;
-//     background: linear-gradient(90deg, rgba(255, 0, 0, 1) 0%, rgba(204, 255, 0, 1) 25%, rgba(0, 255, 147, 1) 50%, rgba(36, 0, 255, 1) 75%, rgba(255, 0, 200, 1) 100%);
-//     background: linear-gradient(90deg, rgba(255, 0, 0, 1) 0%, rgba(207, 213, 16, 1) 25%, rgba(18, 209, 193, 1) 50%, rgba(48, 21, 212, 1) 75%, rgba(255, 0, 200, 1) 100%);
-//     background-clip: text;
-//     color: transparent;
-// }
-
-.header__settings {
-    position: absolute;
-    top: 20px;
-    right: 50px;
-    outline: none;
-    border: none;
-    background: none;
-    cursor: pointer;
-}
-
-.header__newGame {
-    position: absolute;
-    top: 20px;
-    right: 90px;
-    outline: none;
-    border: none;
-    background: none;
-    cursor: pointer;
-}
-
-.header__restart {
-    position: absolute;
-    top: 20px;
-    right: 130px;
-    outline: none;
-    border: none;
-    background: none;
-    cursor: pointer;
-}
-
-.header__instructions {
-    position: absolute;
-    top: 20px;
-    right: 170px;
-    outline: none;
-    border: none;
-    background: none;
-    cursor: pointer;
-}
-
-.header__secondRow {
-    display: flex;
-    justify-content: center;
-}
-
 .scoreValue {
     display: inline-block;
     width: 55px;
@@ -217,26 +207,36 @@ svg {
 
 .settings {
     position: absolute;
-    top: calc((100vh - 704px)/2);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     z-index: 15;
-    background-color: #3d3d3d;
+    // background-color: #3d3d3d;
+    background-color: darkslategray;
     padding: 40px 20px;
     border: 2px solid #888;
     color: #fff;
-}
 
-.settings__header {
-    text-align: center;
-}
+    fieldset,
+    &__header,
+    &__note {
+        margin-bottom: 15px;
+    }
 
-.settings__note {
-    text-align: center;
-}
+    &__header {
+        text-align: center;
+    }
 
-.settings__close {
-    position: absolute;
-    top: 0;
-    right: 0;
+    &__note {
+        text-align: center;
+    }
+
+    &__close {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+
 }
 
 fieldset {
@@ -251,13 +251,15 @@ legend {
     z-index: 3;
     position: absolute;
     top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     border: 3px solid black;
     background: greenyellow;
-    padding: 10px 20px;
+    padding: 30px 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    // align-items: center;
 
 
     &__close {
@@ -266,6 +268,11 @@ legend {
         right: 0;
         border: none;
         cursor: pointer;
+    }
+
+    &__section {
+        margin-bottom: 15px;
+        // width: 75%;
     }
 }
 
