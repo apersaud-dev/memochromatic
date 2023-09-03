@@ -52,11 +52,6 @@ function App() {
     setTiles(func.generateRandomPairs(9, newGameTiles, colourChoice));
   }
 
-  const restartGame = () => {
-    setMatched([]);
-    setScore([0]);
-  }
-
   const playAgain = () => {
     setMatched([]);
     setScore([0]);
@@ -92,7 +87,6 @@ function App() {
         instructionsOpen={showInstructions}
         toggleInstructions={setShowInstrucctions}
         settingsOpen={showSettings}
-        restart={restartGame}
         newGame={playAgain}
         toggleSettings={setShowSettings}
       />

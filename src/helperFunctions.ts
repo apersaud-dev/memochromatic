@@ -57,8 +57,8 @@ export const generateRandomPairs = (columnsState: number, gameTiles: string[], c
 
     randomizePairs(arr1, arr2, gameColours, finalTiles);
     finalTiles.sort((a: ITile, b: ITile) => (a.tile > b.tile ? 1 : -1));
-    console.log("finalTiles");
-    console.log(finalTiles);
+    // console.log("finalTiles");
+    // console.log(finalTiles);
     return finalTiles;
 };
 
@@ -91,7 +91,7 @@ export const gameLogic = (gameTiles: ITile[], selectedTiles: number[], updateSel
         }
         updateTurnCount(0);
         updateSelectedTiles([]);
-    }, 1500);
+    }, 750);
 }
 
 // const gameEngine = (columnsState: any, tilesState: any, turnState: any, selectedTilesState: any, matchedState: any, scoreState: any, updateTilesState: any, updateTurnState: any, updateMatchedState: any, updateScoreState: any, updateGameOver: any) => {
@@ -416,8 +416,8 @@ export const defineBoardWidth = (width: number, columns: number, impMode: boolea
         gridWidth = 468;
     } else {
         const boxDim = defineBoxDim(width, false);
-        console.log(boxDim);
-        console.log(columns);
+        // console.log(boxDim);
+        // console.log(columns);
         gridWidth = (boxDim.length * columns) + (boxDim.margin * (columns * 2));
     }
 

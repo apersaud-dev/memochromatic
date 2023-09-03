@@ -4,14 +4,13 @@ import { Score } from './Score';
 interface IHeaderProps {
     score: number[];
     settingsOpen: boolean;
-    restart: () => void;
     newGame: () => void;
     toggleSettings: Dispatch<SetStateAction<boolean>>;
     instructionsOpen: boolean;
     toggleInstructions: Dispatch<SetStateAction<boolean>>;
 }
 
-const Header: React.FC<IHeaderProps> = ({ score, settingsOpen, restart, newGame, toggleSettings, instructionsOpen, toggleInstructions }) => {
+const Header: React.FC<IHeaderProps> = ({ score, settingsOpen, newGame, toggleSettings, instructionsOpen, toggleInstructions }) => {
 
     const handleClick = (evt: React.MouseEvent<HTMLButtonElement>): void => {
         evt.preventDefault();
@@ -40,11 +39,11 @@ const Header: React.FC<IHeaderProps> = ({ score, settingsOpen, restart, newGame,
                         <path d="M256 512a256 256 0 1 0 0-512 256 256 0 1 0 0 512zm-40-176h24v-64h-24c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-80c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z" />
                     </svg>
                 </button>
-                <button className="header__restart" title="Restart Game" type="button" onClick={restart}>
+                {/* <button className="header__restart" title="Restart Game" type="button" onClick={restart}>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                         <path d="M48.5 224H40c-13.3 0-24-10.7-24-24V72c0-9.7 5.8-18.5 14.8-22.2S50.1 48.1 57 55l41.6 41.6c87.6-86.5 228.7-86.2 315.8 1 87.5 87.5 87.5 229.3 0 316.8s-229.3 87.5-316.8 0c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0c62.5 62.5 163.8 62.5 226.3 0s62.5-163.8 0-226.3c-62.2-62.2-162.7-62.5-225.3-1L185 183c6.9 6.9 8.9 17.2 5.2 26.2S177.7 224 168 224H48.5z" />
                     </svg>
-                </button>
+                </button> */}
                 <button className="header__newGame" title="New Game" type="button" onClick={newGame}>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                         <path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80v352c0 17.4 9.4 33.4 24.5 41.9S58.2 482 73 473l288-176c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z" />

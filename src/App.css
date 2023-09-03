@@ -1,6 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Codystar&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Bungee+Outline&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Bungee+Hairline&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@200&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Palanquin:wght@200&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Prompt:wght@200&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Martel:wght@200&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fira+Sans:wght@200&display=swap");
 html,
 body,
 div,
@@ -126,65 +133,71 @@ https://fonts.google.com/specimen/Poiret+One?preview.text=MemoChromatic%20memoch
   flex-direction: column;
   justify-content: center;
   align-items: center; }
-  .final * {
-    margin-bottom: 15px; }
+
+.final * {
+  margin-bottom: 15px; }
 
 .header {
   width: 100%;
   padding: 10px 20px; }
-  .header__firstRow {
-    display: flex;
-    justify-content: center;
-    position: relative; }
-  .header__settings {
-    position: absolute;
-    top: 20px;
-    right: 50px;
-    outline: none;
-    border: none;
-    background: none;
-    cursor: pointer; }
-  .header__newGame {
-    position: absolute;
-    top: 20px;
-    right: 90px;
-    outline: none;
-    border: none;
-    background: none;
-    cursor: pointer; }
-  .header__restart {
-    position: absolute;
-    top: 20px;
-    right: 130px;
-    outline: none;
-    border: none;
-    background: none;
-    cursor: pointer; }
-  .header__instructions {
-    position: absolute;
-    top: 20px;
-    right: 170px;
-    outline: none;
-    border: none;
-    background: none;
-    cursor: pointer; }
-  .header__secondRow {
-    display: flex;
-    justify-content: center; }
+
+.header__firstRow {
+  display: flex;
+  justify-content: center;
+  position: relative; }
+
+.header__settings {
+  position: absolute;
+  top: 20px;
+  right: 50px;
+  outline: none;
+  border: none;
+  background: none;
+  cursor: pointer; }
+
+.header__newGame {
+  position: absolute;
+  top: 20px;
+  right: 90px;
+  outline: none;
+  border: none;
+  background: none;
+  cursor: pointer; }
+
+.header__restart {
+  position: absolute;
+  top: 20px;
+  right: 130px;
+  outline: none;
+  border: none;
+  background: none;
+  cursor: pointer; }
+
+.header__instructions {
+  position: absolute;
+  top: 20px;
+  right: 170px;
+  outline: none;
+  border: none;
+  background: none;
+  cursor: pointer; }
+
+.header__secondRow {
+  display: flex;
+  justify-content: center; }
 
 .logo {
   margin-top: 10px;
   box-shadow: blue 0px 0px 0px 2px inset, #1fc11b -4px -2px, #ffd913 -8px -4px, #ff9c55 -12px -6px, #ff5555 -16px -8px; }
-  .logo__header {
-    padding: 8px;
-    font-family: "Codystar", cursive;
-    font-family: "Bungee Outline", cursive;
-    font-family: "Bungee Hairline", cursive;
-    font-size: 40px;
-    color: white;
-    background: linear-gradient(90deg, #f70303 0%, #ffa000 10%, #fffe00 20%, #06fc07 30%, #02ffe1 40%, #0452ff 50%, #2203ff 60%, #d402ff 70%, #ff0199 80%, #ff0162 90%);
-    background-clip: text;
-    color: transparent; }
+
+.logo__header {
+  padding: 8px;
+  font-family: "Bungee Hairline", cursive;
+  font-size: 40px;
+  color: white;
+  background: linear-gradient(90deg, #f70303 0%, #ffa000 10%, #fffe00 20%, #06fc07 30%, #02ffe1 40%, #0452ff 50%, #2203ff 60%, #d402ff 70%, #ff0199 80%, #ff0162 90%);
+  background-clip: text;
+  color: transparent; }
 
 .scoreValue {
   display: inline-block;
@@ -203,16 +216,33 @@ svg {
   padding: 40px 20px;
   border: 2px solid #888;
   color: #fff; }
-  .settings fieldset, .settings__header, .settings__note {
-    margin-bottom: 15px; }
-  .settings__header {
-    text-align: center; }
-  .settings__note {
-    text-align: center; }
-  .settings__close {
-    position: absolute;
-    top: 0;
-    right: 0; }
+
+.settings fieldset, .settings__header, .settings__note {
+  margin-bottom: 15px; }
+
+.settings__header {
+  font-family: "Bungee Hairline", cursive;
+  text-align: center; }
+
+.settings__note {
+  font-family: "Libre Franklin", sans-serif;
+  text-align: center; }
+
+.settings__close {
+  position: absolute;
+  top: 0;
+  right: 0; }
+
+.settings legend,
+.settings label,
+.settings h3 {
+  font-family: "Libre Franklin", sans-serif;
+  font-family: "Palanquin", sans-serif;
+  font-family: "Prompt", sans-serif;
+  font-family: "Martel", serif;
+  font-family: "Montserrat", sans-serif;
+  font-family: "Hind Siliguri", sans-serif;
+  font-family: "Fira Sans", sans-serif; }
 
 fieldset {
   margin-bottom: 10px; }
@@ -232,14 +262,16 @@ legend {
   display: flex;
   flex-direction: column;
   justify-content: center; }
-  .instructions__close {
-    position: absolute;
-    top: 0;
-    right: 0;
-    border: none;
-    cursor: pointer; }
-  .instructions__section {
-    margin-bottom: 15px; }
+
+.instructions__close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: none;
+  cursor: pointer; }
+
+.instructions__section {
+  margin-bottom: 15px; }
 
 .example {
   display: flex;

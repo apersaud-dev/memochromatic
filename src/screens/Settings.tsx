@@ -25,7 +25,11 @@ const Settings: React.FC<ISettingsProps> = ({ columns, colourScheme, impossibleM
         return null;
     }
 
-    const disableTiles = colourSelection === "split-complementary" || colourSelection === "triadic" || colourSelection === "analogous" ? true : false;
+    // const disableTiles = colourSelection === "split-complementary" || colourSelection === "triadic" || colourSelection === "analogous" ? true : false;
+
+    const disableColumns = difficulty ? true : tilesSelection === 6 ? false : colourSelection === "split-complementary" || colourSelection === "triadic" || colourSelection === "analogous" ? true : false;
+
+    const disableColours = tilesSelection * 4 === 24 ? false : true;
 
     const resetButtonHandler = () => {
         setTilesSelection(columns);
@@ -52,7 +56,6 @@ const Settings: React.FC<ISettingsProps> = ({ columns, colourScheme, impossibleM
                 <fieldset>
                     <legend>Number of Tiles</legend>
                     {Data.tileSettingsData.map(datum => {
-                        console.log(datum);
                         const checked = tilesSelection === datum.value;
 
                         return (
@@ -61,7 +64,7 @@ const Settings: React.FC<ISettingsProps> = ({ columns, colourScheme, impossibleM
                                 data={datum}
                                 checked={checked}
                                 updateStateFunc={setTilesSelection}
-                                disabled={disableTiles}
+                                disabled={disableColumns}
                             />
                         )
                     })}
@@ -109,7 +112,7 @@ const Settings: React.FC<ISettingsProps> = ({ columns, colourScheme, impossibleM
                                     data={datum}
                                     checked={checked}
                                     updateStateFunc={setColourSelection}
-                                    disabled={tilesSelection * 4 === 24 ? false : true}
+                                    disabled={disableColours}
                                 />
                             )
                         })}

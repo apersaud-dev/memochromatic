@@ -183,8 +183,8 @@
 
     &__header {
         padding: 8px;
-        font-family: $codystar;
-        font-family: $bungee;
+        // font-family: $codystar;
+        // font-family: $bungee;
         font-family: $bungee-hairline;
         font-size: 40px;
         color: white;
@@ -224,10 +224,12 @@ svg {
     }
 
     &__header {
+        font-family: $bungee-hairline;
         text-align: center;
     }
 
     &__note {
+        font-family: $libre-franklin;
         text-align: center;
     }
 
@@ -235,6 +237,18 @@ svg {
         position: absolute;
         top: 0;
         right: 0;
+    }
+
+    legend,
+    label,
+    h3 {
+        font-family: $libre-franklin;
+        font-family: $palanquin;
+        font-family: $prompt;
+        font-family: $martel;
+        font-family: $montserrat;
+        font-family: $hind-siliguri;
+        font-family: $fira-sans;
     }
 
 }
