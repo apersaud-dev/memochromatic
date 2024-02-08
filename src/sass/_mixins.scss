@@ -9,3 +9,25 @@
 @mixin neutralTheme {
     background-color: #3d3d3d;
 }
+
+@mixin rangeTrack {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 3px;
+    background: #009fb7;
+}
+
+@mixin rangeThumb {
+    -webkit-appearance: none;
+    appearance: none;
+    border: 2px solid #009fb7;
+    border-radius: 50%;
+    outline: solid 2px #fbfbfb;
+    height: 20px;
+    width: 20px;
+    position: relative;
+    bottom: 8px;
+    background: #fbfbfb;
+    background-size: 50%;
+    cursor: grab;
+}
