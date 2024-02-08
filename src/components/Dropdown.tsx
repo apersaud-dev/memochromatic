@@ -20,7 +20,7 @@ const Dropdown: React.FC<IDropdownProps> = ({ defVal, updateScheme, tiles }) => 
         >
             {Data.colourSchemes.map((scheme) => {
 
-                const unselectable = scheme.numOfColours != 3 ? false : tiles * 4 == 24 ? false : true;
+                const unselectable = scheme.numOfColours !== 3 ? false : tiles * 4 === 24 ? false : true;
                 return (
                     <option
                         key={`${scheme.name}-${scheme.id}`}
