@@ -1,5 +1,6 @@
 @import './sass/_reset';
 @import './sass/_typography';
+@import './sass/mixins';
 
 // :root {
 //     background-color: #3d3d3d;
@@ -14,10 +15,9 @@
 // }
 
 .App {
-    background-color: #fbfbfb;
+    background-color: #FFF;
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     align-items: center;
     height: 100vh;
 
@@ -36,10 +36,9 @@
 }
 
 .box {
-    // background-color: #3d3d3d;
-    // border: 1px solid #8f8f8f;
-    background-color: #fbfbfb;
-    border: 1px solid black;
+    background-color: #e7e7da;
+    border: 1px solid #e7e7da;
+    border-radius: 11%;
     padding: 0;
 
     perspective: 300px;
@@ -65,6 +64,7 @@
     top: -1px;
     right: -1px;
     backface-visibility: hidden;
+    border-radius: 11%;
 }
 
 .back {
@@ -80,8 +80,8 @@
 }
 
 .matched {
-    background-color: #FBFBFB;
-    border-color: #FBFBFB;
+    background-color: #FFF;
+    border-color: #FFF;
 }
 
 .impossible {
@@ -100,33 +100,61 @@
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 2;
-    border: 3px solid black;
-    background: gold;
-    padding: 20px 10px;
+    border: 3px solid transparent;
+    border-radius: 5px;
+    background: #fbfbfb;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    font-family: $palanquin;
+
+    &__overlay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(92, 92, 92, 0.63);
+    }
 
     * {
         margin-bottom: 15px;
+    }
+
+    &__heading {
+        font-size: 22px;
+    }
+
+    &__playAgain {
+        background: #FBFBFB;
+        padding: 8px 12px;
+        border: 1px solid transparent;
+        border-radius: 5px;
+        margin-bottom: 0;
+        cursor: pointer;
+        transition: all 0.5s linear;
+
+        &:hover {
+            border-color: #009FB7;
+            transition: all 0.5s linear;
+        }
     }
 }
 
 .header {
     width: 100%;
     padding: 10px 20px;
+    font-family: $bungee-hairline;
 
-    &__firstRow {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+
+    &__options {
         display: flex;
-        justify-content: center;
-        position: relative;
     }
 
     &__settings {
-        position: absolute;
-        top: 20px;
-        right: 50px;
         outline: none;
         border: none;
         background: none;
@@ -134,9 +162,6 @@
     }
 
     &__newGame {
-        position: absolute;
-        top: 20px;
-        right: 90px;
         outline: none;
         border: none;
         background: none;
@@ -146,7 +171,7 @@
     &__restart {
         position: absolute;
         top: 20px;
-        right: 130px;
+        right: 50px;
         outline: none;
         border: none;
         background: none;
@@ -154,51 +179,41 @@
     }
 
     &__instructions {
-        position: absolute;
-        top: 20px;
-        right: 170px;
         outline: none;
         border: none;
         background: none;
         cursor: pointer;
     }
 
-    &__secondRow {
-        display: flex;
-        justify-content: center;
+    &__score {
+        font-family: $bungee;
+        place-self: center;
+
+        & p {
+            text-align: right;
+        }
     }
 }
 
 .logo {
-    margin-top: 10px;
-    box-shadow: blue 0px 0px 0px 2px inset,
-        // rgb(255, 255, 255) -4px -4px 0px -3px,
-        rgb(31, 193, 27) -4px -2px,
-        // rgb(255, 255, 255) -8px -6px 0px -3px,
-        rgb(255, 217, 19) -8px -4px,
-        // rgb(255, 255, 255) -12px -8px 0px -3px,
-        rgb(255, 156, 85) -12px -6px,
-        // rgb(255, 255, 255) -16px -10px 0px -3px,
-        rgb(255, 85, 85) -16px -8px;
-
     &__header {
         padding: 8px;
-        // font-family: $codystar;
-        // font-family: $bungee;
         font-family: $bungee-hairline;
         font-size: 40px;
-        color: white;
-        // background: rgb(247,3,3);
         background: linear-gradient(90deg, rgba(247, 3, 3, 1) 0%, rgba(255, 160, 0, 1) 10%, rgba(255, 254, 0, 1) 20%, rgba(6, 252, 7, 1) 30%, rgba(2, 255, 225, 1) 40%, rgba(4, 82, 255, 1) 50%, rgba(34, 3, 255, 1) 60%, rgba(212, 2, 255, 1) 70%, rgba(255, 1, 153, 1) 80%, rgba(255, 1, 98, 1) 90%);
         background-clip: text;
         color: transparent;
+        position: relative;
     }
 
 }
 
-.scoreValue {
-    display: inline-block;
-    width: 55px;
+.score {
+    &__value {
+        display: inline-block;
+        width: 55px;
+        text-align: left;
+    }
 }
 
 svg {
@@ -211,47 +226,98 @@ svg {
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 15;
-    // background-color: #3d3d3d;
-    background-color: darkslategray;
     padding: 40px 20px;
-    border: 2px solid #888;
-    color: #fff;
+    border: 3px solid transparent;
+    border-radius: 5px;
+    background: #fbfbfb;
+    color: #000;
+
+    &__overlay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(92, 92, 92, 0.63);
+    }
 
     fieldset,
     &__header,
     &__note {
         margin-bottom: 15px;
+        font-family: $palanquin;
     }
 
     &__header {
-        font-family: $bungee-hairline;
+        font-weight: 700;
         text-align: center;
     }
 
     &__note {
-        font-family: $libre-franklin;
         text-align: center;
+        font-weight: 400;
     }
 
     &__close {
         position: absolute;
-        top: 0;
-        right: 0;
+        border: none;
+        top: 15px;
+        right: 12px;
+        background: none;
+        cursor: pointer;
+        transition: all linear 0.3s;
+
+        &:hover svg path {
+            fill: #008DA3;
+            transition: all linear 0.3s;
+        }
+    }
+
+    & svg {
+        width: 18px;
     }
 
     legend,
     label,
     h3 {
-        font-family: $libre-franklin;
         font-family: $palanquin;
-        font-family: $prompt;
-        font-family: $martel;
-        font-family: $montserrat;
-        font-family: $hind-siliguri;
-        font-family: $fira-sans;
     }
 
+    &__formRow {
+        display: flex;
+        justify-content: space-between;
+        margin: 25px 0;
+    }
+
+    &__formDivider {
+        height: 2px;
+        background-color: rgb(0, 0, 0, 0.4);
+    }
+
+    &__formButtonRow {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 25px;
+    }
+
+    &__button {
+        background: #fbfbfb;
+        padding: 8px 12px;
+        border: 1px solid transparent;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.5s linear;
+
+        &:hover {
+            border-color: #009FB7;
+            transition: all 0.5s linear;
+        }
+
+        &:active {
+            outline: none;
+            box-shadow: inset 0px 0px 5px #008DA3;
+        }
+    }
 }
+
 
 fieldset {
     margin-bottom: 10px;
@@ -267,26 +333,54 @@ legend {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border: 3px solid black;
-    background: greenyellow;
-    padding: 30px 10px;
+    border: 3px solid transparent;
+    border-radius: 5px;
+    background: #fbfbfb;
+    padding: 30px 15px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    // align-items: center;
 
+    &__overlay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(92, 92, 92, 0.63);
+    }
 
     &__close {
         position: absolute;
-        top: 0;
-        right: 0;
+        top: 15px;
+        right: 12px;
         border: none;
         cursor: pointer;
+        background: none;
+        transition: all linear 0.3s;
+
+        &:hover svg path {
+            fill: #008DA3;
+            transition: all linear 0.3s;
+        }
+    }
+
+    &__heading {
+        font-family: $palanquin;
+        font-weight: 700;
+        text-align: center;
     }
 
     &__section {
         margin-bottom: 15px;
-        // width: 75%;
+    }
+
+    & svg {
+        width: 18px;
+    }
+
+    & p {
+        font-family: $palanquin;
+        font-weight: 400;
     }
 }
 
@@ -300,6 +394,156 @@ legend {
     height: 20px;
     border: 1px solid black;
     margin-right: 5px;
+}
+
+.range {
+    appearance: none;
+    width: 200px;
+    appearance: none;
+    background: transparent;
+
+    &::-webkit-slider-runnable-track {
+        @include rangeTrack
+    }
+
+    &:focus {
+        background: none;
+        outline: none;
+    }
+
+    &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        @include rangeThumb;
+    }
+
+    &:disabled::-webkit-slider-runnable-track {
+        background: #ababab;
+    }
+
+    &:disabled::-webkit-slider-thumb {
+        background: #EEE;
+        border-color: #EEE;
+        background: #ababab;
+        border-color: #ababab;
+    }
+
+    &:active::-webkit-slider-thumb {
+        box-shadow: 0 0 0 20px inset #222;
+        box-shadow: 0 0 0 20px inset #1E3888;
+    }
+
+    &:focus-visible::-webkit-slider-thumb {
+        box-shadow: 0 0 0 20px inset #222;
+    }
+
+    &__labelWrapper {
+        & li:first-child {
+            text-align: left;
+        }
+
+        & li:nth-child(even) {
+            text-align: center;
+        }
+
+        & li:last-child {
+            text-align: right;
+        }
+    }
+
+    &__label {
+        position: relative;
+        float: left;
+        width: 33%;
+        margin-top: 8px;
+    }
+}
+
+.colourDropdown {
+    width: 200px;
+    padding: 4px 8px;
+    border: 1px solid #0081A7;
+    border: 1px solid #009FB7;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:focus {
+        border-color: transparent;
+        outline: 2px solid #0081A7;
+    }
+
+    &:focus-visible {
+        border-color: transparent;
+        outline: 2px solid #0081A7;
+    }
+
+    &__option {
+        background: #FFF;
+
+    }
+}
+
+.impossibleMode {
+    display: flex;
+    width: 200px;
+    border-radius: 2px;
+}
+
+.radioInput {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex: 1 0 auto;
+    height: 30px;
+
+    &__button {
+        width: 100%;
+        height: 100%;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        outline: none;
+        padding: 4px 8px;
+        border: 1px solid transparent;
+        border-radius: 5px;
+        margin: 0;
+        cursor: pointer;
+        transition: all linear 0.2s;
+
+        &:hover {
+            border-color: #009FB7;
+            transition: all linear 0.2s;
+        }
+
+        &:active {
+            outline: none;
+            box-shadow: inset 0px 0px 5px #008DA3;
+        }
+
+        &:checked {
+            background: linear-gradient(180deg, #009FB7, #1E3888);
+        }
+
+        &:checked:hover {
+            border-color: transparent;
+        }
+    }
+
+    &__label {
+        position: absolute;
+        width: 24px;
+        left: calc(50% - 12px);
+        color: #777;
+
+        &-checked {
+            @extend .radioInput__label;
+            color: #FFF;
+        }
+    }
+}
+
+.footer {
+    margin-bottom: 20px;
+    font-family: $montserrat
 }
 
 /* 
