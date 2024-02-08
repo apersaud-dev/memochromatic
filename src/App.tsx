@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import './App.css';
 import Header from './components/Header';
-import { GameOver } from './screens/GameOver';
 import Settings from './screens/Settings';
-import * as func from './helperFunctions';
 import Game from './screens/Game';
-import { ITile } from './interfaces';
 import Instructions from './screens/Instructions';
+import { GameOver } from './screens/GameOver';
+import Footer from './components/Footer';
+import { ITile } from './interfaces';
+import * as func from './helperFunctions';
 
 function App() {
 
@@ -81,7 +82,6 @@ function App() {
 
   return (
     <div className="App">
-      <Instructions open={showInstructions} close={setShowInstrucctions} />
       <Header
         score={score}
         instructionsOpen={showInstructions}
@@ -101,6 +101,7 @@ function App() {
         boardWidth={boardWidth}
         boxDim={boxDim}
       />
+      <Instructions open={showInstructions} close={setShowInstrucctions} />
       <Settings
         columns={columns}
         colourScheme={colourScheme}
@@ -113,6 +114,7 @@ function App() {
         height={height}
       />
       <GameOver show={gameCompleted} playAgain={playAgain} score={score} />
+      <Footer />
     </div>
   );
 }
