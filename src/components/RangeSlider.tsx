@@ -9,7 +9,7 @@ interface IRangeSliderProps {
 
 const RangeSlider: React.FC<IRangeSliderProps> = ({ val, updateTiles, colourSelection }) => {
 
-    const disableSlider = colourSelection == "analogous" || colourSelection == "triadic" || colourSelection == "split-complementary";
+    const disableSlider = colourSelection === "analogous" || colourSelection === "triadic" || colourSelection === "split-complementary";
 
     return (
         <>
