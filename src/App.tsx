@@ -80,6 +80,10 @@ function App() {
   const boxDim = func.defineBoxDim(width, impossibleMode);
   const boardWidth = func.defineBoardWidth(width, columns, impossibleMode);
 
+  // @ts-ignore
+  window.cheat = () => {
+    func.forceMatches(tiles, setMatched);
+  }
 
   return (
     <div className="App">
