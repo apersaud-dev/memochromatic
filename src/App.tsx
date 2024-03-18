@@ -1,5 +1,4 @@
 import { useState } from 'react';
-//import './App.css';
 import './style.scss'
 import Header from './components/Header';
 import Settings from './screens/Settings';
