@@ -12,6 +12,11 @@ export const GameOver: React.FC<IGameOverProps> = ({ show, playAgain, score }) =
 
     const calculatedScore = totalScore(score);
 
+    const shareScore = () => {
+        navigator.clipboard.writeText(calculatedScore.toString());
+
+    };
+
     if (!show) {
         return null;
     }
@@ -23,6 +28,7 @@ export const GameOver: React.FC<IGameOverProps> = ({ show, playAgain, score }) =
                 <p className="final__score">Your final score is <b>{calculatedScore}</b>.</p>
                 <p className="final__turns">It took you {score.length - 1} turns to match all the pairs.</p>
                 <button className="final__playAgain" onClick={playAgain}>Play Again</button>
+                <button className="final__" onClick={shareScore}>Share</button>
             </div>
         </div>
     )
