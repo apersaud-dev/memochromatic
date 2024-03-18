@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction, useState } from "react"
-import Option from "../components/Option";
-import * as Data from '../staticData';
-import { handleInputChange } from "../helperFunctions";
+import RangeSlider from "../components/RangeSlider";
+import Dropdown from "../components/Dropdown";
+import RadioButton from "../components/RadioButton";
 
 interface ISettingsProps {
     columns: number;
@@ -11,9 +11,11 @@ interface ISettingsProps {
     updateSettings: (col: number, colour: string) => void;
     open: boolean;
     close: Dispatch<SetStateAction<boolean>>;
+    width: number;
+    height: number;
 }
 
-const Settings: React.FC<ISettingsProps> = ({ columns, colourScheme, impossibleMode, startImpossibleMode, updateSettings, open, close }) => {
+const Settings: React.FC<ISettingsProps> = ({ columns, colourScheme, impossibleMode, startImpossibleMode, updateSettings, open, close, width, height }) => {
 
     const [tilesSelection, setTilesSelection] = useState(columns);
     const [colourSelection, setColourSelection] = useState(colourScheme);
@@ -23,11 +25,14 @@ const Settings: React.FC<ISettingsProps> = ({ columns, colourScheme, impossibleM
         return null;
     }
 
-    const disableTiles = colourSelection === "split-complementary" || colourSelection === "triadic" || colourSelection === "analogous" ? true : false;
-
     const resetButtonHandler = () => {
         setTilesSelection(columns);
         setColourSelection(colourScheme);
+    }
+
+    const closeSettings = () => {
+        resetButtonHandler()
+        close(false);
     }
 
     const handleFormSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -42,119 +47,84 @@ const Settings: React.FC<ISettingsProps> = ({ columns, colourScheme, impossibleM
     }
 
     return (
-        <div className="settings">
-            <h2 className="settings__header">Settings</h2>
-            <button onClick={() => close(false)} className="settings__close">X</button>
-            <p className="settings__note">NOTE: Changing settings midgame will reset your current progress</p>
-            <form>
-                <fieldset>
-                    <legend>Number of Tiles</legend>
-                    {Data.tileSettingsData.map(datum => {
-                        console.log(datum);
-                        const checked = tilesSelection === datum.value;
-
-                        return (
-                            <Option
-                                key={`${datum.id}-${datum.name}`}
-                                data={datum}
-                                checked={checked}
-                                updateStateFunc={setTilesSelection}
-                                disabled={disableTiles}
+        <div className="settings__overlay">
+            <div className="settings">
+                <h2 className="settings__header">SETTINGS</h2>
+                <button onClick={() => closeSettings()} className="settings__close">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                        <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3l105.4 105.3c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256l105.3-105.4z" />
+                    </svg>
+                </button>
+                <p className="settings__note">NOTE: Changing settings midgame will reset your current progress</p>
+                <form className="settings__form">
+                    <div className="settings__formRow">
+                        <h3>Number of Tiles</h3>
+                        <div>
+                            <RangeSlider
+                                val={tilesSelection}
+                                updateTiles={setTilesSelection}
+                                colourSelection={colourSelection}
                             />
-                        )
-                    })}
-                </fieldset>
-                <fieldset>
-                    <legend>Colour Scheme</legend>
-                    <div>
-                        <h3>1-Colour Scheme</h3>
-                        {Data.monoChromaticSettings.map(datum => {
-                            const checked = colourSelection === datum.value;
-
-                            return (
-                                <Option
-                                    key={`${datum.id}-${datum.name}`}
-                                    data={datum}
-                                    checked={checked}
-                                    updateStateFunc={setColourSelection}
-                                />
-                            )
-                        })}
+                        </div>
                     </div>
-                    <div>
-                        <h3>2-Colour Scheme</h3>
-                        {Data.diChromaticSettings.map(datum => {
-                            const checked = colourSelection === datum.value;
-
-                            return (
-                                <Option
-                                    key={`${datum.id}-${datum.name}`}
-                                    data={datum}
-                                    checked={checked}
-                                    updateStateFunc={setColourSelection}
-                                />
-                            )
-                        })}
+                    <div className="settings__formDivider"></div>
+                    <div className="settings__formRow">
+                        <h3>Colour Scheme</h3>
+                        <Dropdown
+                            defVal={colourSelection}
+                            updateScheme={setColourSelection}
+                            tiles={tilesSelection}
+                        />
                     </div>
-                    <div>
-                        <h3>3-Colour Scheme</h3>
-                        {Data.triChromaticSettings.map(datum => {
-                            const checked = colourSelection === datum.value;
-
-                            return (
-                                <Option
-                                    key={`${datum.id}-${datum.name}`}
-                                    data={datum}
-                                    checked={checked}
-                                    updateStateFunc={setColourSelection}
-                                    disabled={tilesSelection * 4 === 24 ? false : true}
-                                />
-                            )
-                        })}
+                    <div className="settings__formDivider"></div>
+                    {(width > 661 && height > 750) ?
+                        <>
+                            <div className="settings__formRow">
+                                <h3>Impossible Mode</h3>
+                                <div className="impossibleMode">
+                                    <RadioButton
+                                        id="impossibleOff"
+                                        name="impossible"
+                                        value="false"
+                                        textDisplay="Off"
+                                        difficulty={difficulty}
+                                        updateMode={setDifficulty}
+                                    />
+                                    <RadioButton
+                                        id="impossibleOn"
+                                        name="impossible"
+                                        value="true"
+                                        textDisplay="On"
+                                        difficulty={difficulty}
+                                        updateMode={setDifficulty}
+                                    />
+                                </div>
+                            </div>
+                            <div className="settings__formDivider"></div>
+                        </>
+                        :
+                        null
+                    }
+                    <div className="settings__formButtonRow">
+                        <button
+                            className="settings__button"
+                            type="button"
+                            onClick={() => resetButtonHandler()}
+                        >
+                            Reset
+                        </button>
+                        <button
+                            className="settings__button"
+                            type="submit"
+                            onClick={(e) => handleFormSubmit(e)}
+                        >
+                            Save
+                        </button>
                     </div>
-                    <div>
-                        <h3>4-Colour Scheme</h3>
-                        {Data.tetraChromaticSettings.map(datum => {
-                            const checked = colourSelection === datum.value;
-
-                            return (
-                                <Option
-                                    key={`${datum.id}-${datum.name}`}
-                                    data={datum}
-                                    checked={checked}
-                                    updateStateFunc={setColourSelection}
-                                />
-                            )
-                        })}
-                    </div>
-                </fieldset>
-                <fieldset>
-                    <legend>Impossible Mode</legend>
-                    <input
-                        id="impossibleOff"
-                        type="radio"
-                        name="impossible"
-                        value="false"
-                        checked={difficulty === false}
-                        onChange={(e) => { handleInputChange(e.target.value, setDifficulty) }}
-                    />
-                    <label htmlFor="impossibleOff">Off</label>
-                    <input
-                        id="impossibleOn"
-                        type="radio"
-                        name="impossible"
-                        value="true"
-                        checked={difficulty === true}
-                        onChange={(e) => { handleInputChange(e.target.value, setDifficulty) }}
-                    />
-                    <label htmlFor="impossibleOn">On</label>
-                </fieldset>
-                <button type="submit" onClick={(e) => handleFormSubmit(e)}>Save</button>
-                <button type="button" onClick={() => resetButtonHandler()}>Reset</button>
-            </form>
+                </form>
+            </div>
         </div>
     )
 }
-
 
 export default Settings;

@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
-import './App.css';
+import { useState } from 'react';
+//import './App.css';
+import './style.scss'
 import Header from './components/Header';
-import { GameOver } from './screens/GameOver';
 import Settings from './screens/Settings';
-import * as func from './helperFunctions';
 import Game from './screens/Game';
-import { ITile } from './interfaces';
 import Instructions from './screens/Instructions';
+import { GameOver } from './screens/GameOver';
+import Footer from './components/Footer';
+import { ITile } from './interfaces';
+import * as func from './helperFunctions';
 
 function App() {
 
@@ -52,11 +54,6 @@ function App() {
     setTiles(func.generateRandomPairs(9, newGameTiles, colourChoice));
   }
 
-  const restartGame = () => {
-    setMatched([]);
-    setScore([0]);
-  }
-
   const playAgain = () => {
     setMatched([]);
     setScore([0]);
@@ -83,16 +80,18 @@ function App() {
   const boxDim = func.defineBoxDim(width, impossibleMode);
   const boardWidth = func.defineBoardWidth(width, columns, impossibleMode);
 
+  // @ts-ignore
+  window.cheat = () => {
+    func.forceMatches(tiles, setMatched);
+  }
 
   return (
     <div className="App">
-      <Instructions open={showInstructions} close={setShowInstrucctions} />
       <Header
         score={score}
         instructionsOpen={showInstructions}
         toggleInstructions={setShowInstrucctions}
         settingsOpen={showSettings}
-        restart={restartGame}
         newGame={playAgain}
         toggleSettings={setShowSettings}
       />
@@ -107,6 +106,7 @@ function App() {
         boardWidth={boardWidth}
         boxDim={boxDim}
       />
+      <Instructions open={showInstructions} close={setShowInstrucctions} />
       <Settings
         columns={columns}
         colourScheme={colourScheme}
@@ -115,8 +115,11 @@ function App() {
         open={showSettings}
         close={setShowSettings}
         updateSettings={updateSettings}
+        width={width}
+        height={height}
       />
       <GameOver show={gameCompleted} playAgain={playAgain} score={score} />
+      <Footer />
     </div>
   );
 }

@@ -18,36 +18,21 @@ const Option: React.FC<IOptionProps> = ({ data, checked, updateStateFunc, disabl
 
     const labelOutput = typeof (data.value) === "number" ? data.value * 4 : data.value;
 
-    if (data.value === 6) {
-        return (
-            <>
-                <input
-                    id={data.id}
-                    type="radio"
-                    name={data.name}
-                    value={data.value}
-                    checked={checked}
-                    onChange={(evt) => { handleInputChange(evt.target.value, updateStateFunc) }}
-                />
-                <label htmlFor={data.id} >{labelOutput}</label>
-            </>
-        )
-    } else {
-        return (
-            <>
-                <input
-                    id={data.id}
-                    type="radio"
-                    name={data.name}
-                    value={data.value}
-                    checked={checked}
-                    onChange={(evt) => { handleInputChange(evt.target.value, updateStateFunc) }}
-                    disabled={disabled}
-                />
-                <label htmlFor={data.id} >{labelOutput}</label>
-            </>
-        )
-    }
+    return (
+        <>
+            <input
+                id={data.id}
+                type="radio"
+                name={data.name}
+                value={data.value}
+                checked={checked}
+                onChange={(evt) => { handleInputChange(evt.target.value, updateStateFunc) }}
+                disabled={disabled}
+            />
+            <label htmlFor={data.id} >{labelOutput}</label>
+        </>
+    )
+    // }
 }
 
 export default Option;

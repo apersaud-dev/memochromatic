@@ -1,263 +1,42 @@
-@import url("https://fonts.googleapis.com/css2?family=Codystar&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Bungee+Outline&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Bungee+Hairline&display=swap");
-html,
-body,
-div,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-a,
-img,
-ol,
-ul,
-li,
-header,
-nav,
-main,
-section,
-blockquote,
-figcaption,
-footer {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  vertical-align: baseline; }
-
-html {
-  font-size: 16px;
-  box-sizing: border-box;
-  overflow-x: hidden; }
-
-*,
-*::before,
-*::after {
-  box-sizing: inherit; }
-
-body {
-  font-family: Georgia, 'Times New Roman', Times, serif; }
-
-li {
-  list-style: none; }
-
-a {
-  text-decoration: none; }
-
-/* 
-https://fonts.google.com/specimen/Codystar?preview.text=MemoChromatic&preview.text_type=custom&category=Display
-
-https://fonts.google.com/specimen/Phudu?preview.text=memochromatic&preview.text_type=custom&category=Display
-
-https://fonts.google.com/specimen/Poiret+One?preview.text=MemoChromatic%20memochromatic%20MEMOCHROMATIC&preview.text_type=custom&category=Display
-
-
-
-*/
-:root {
-  background-color: #3d3d3d; }
-
-.App {
-  display: flex;
-  flex-direction: column;
-  /* justify-content: center; */
-  align-items: center;
-  height: 100vh; }
-
-.board {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center; }
-
-.gridRow {
-  display: flex;
-  flex-wrap: wrap; }
-
-.box {
-  background-color: #3d3d3d;
-  border: 1px solid #8f8f8f;
-  padding: 0;
-  perspective: 300px;
-  transition: transform 0.75s;
-  transform-style: preserve-3d;
-  cursor: pointer; }
-
-.front,
-.back {
-  position: absolute;
-  top: -1px;
-  right: -1px;
-  backface-visibility: hidden; }
-
-.back {
-  transform: rotateY(180deg); }
-
-.disabled {
-  cursor: auto; }
-
-.flip {
-  transform: rotateY(180deg); }
-
-.matched {
-  background-color: #FBFBFB;
-  border-color: #FBFBFB; }
-
-.impossible {
-  width: 70px;
-  height: 70px; }
-
-.invisible {
-  visibility: hidden;
-  /* width: 100px; */
-  /* height: 100px; */
-  /* border: 1px solid transparent; */
-  margin: 11px; }
-
-.final {
-  position: absolute;
-  top: 50%;
-  z-index: 2;
-  border: 3px solid black;
-  background: gold;
-  padding: 10px 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center; }
-
-.header {
-  width: 100%;
-  padding: 10px 20px; }
-
-.header__firstRow {
-  display: flex;
-  justify-content: center;
-  position: relative; }
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
 
 .logo {
-  margin-top: 10px;
-  box-shadow: blue 0px 0px 0px 2px inset, #1fc11b -4px -2px, #ffd913 -8px -4px, #ff9c55 -12px -6px, #ff5555 -16px -8px; }
-  .logo__header {
-    padding: 8px;
-    font-family: "Codystar", cursive;
-    font-family: "Bungee Outline", cursive;
-    font-family: "Bungee Hairline", cursive;
-    font-size: 40px;
-    color: white;
-    background: linear-gradient(90deg, #f70303 0%, #ffa000 10%, #fffe00 20%, #06fc07 30%, #02ffe1 40%, #0452ff 50%, #2203ff 60%, #d402ff 70%, #ff0199 80%, #ff0162 90%);
-    background-clip: text;
-    color: transparent; }
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
 
-.header__settings {
-  position: absolute;
-  top: 20px;
-  right: 50px;
-  outline: none;
-  border: none;
-  background: none;
-  cursor: pointer; }
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
 
-.header__newGame {
-  position: absolute;
-  top: 20px;
-  right: 90px;
-  outline: none;
-  border: none;
-  background: none;
-  cursor: pointer; }
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
 
-.header__restart {
-  position: absolute;
-  top: 20px;
-  right: 130px;
-  outline: none;
-  border: none;
-  background: none;
-  cursor: pointer; }
+.card {
+  padding: 2em;
+}
 
-.header__instructions {
-  position: absolute;
-  top: 20px;
-  right: 170px;
-  outline: none;
-  border: none;
-  background: none;
-  cursor: pointer; }
-
-.header__secondRow {
-  display: flex;
-  justify-content: center; }
-
-.scoreValue {
-  display: inline-block;
-  width: 55px; }
-
-svg {
-  width: 25px; }
-
-.settings {
-  position: absolute;
-  top: calc((100vh - 704px)/2);
-  z-index: 15;
-  background-color: #3d3d3d;
-  padding: 40px 20px;
-  border: 2px solid #888;
-  color: #fff; }
-
-.settings__header {
-  text-align: center; }
-
-.settings__note {
-  text-align: center; }
-
-.settings__close {
-  position: absolute;
-  top: 0;
-  right: 0; }
-
-fieldset {
-  margin-bottom: 10px; }
-
-legend {
-  text-align: center; }
-
-.instructions {
-  z-index: 3;
-  position: absolute;
-  top: 50%;
-  border: 3px solid black;
-  background: greenyellow;
-  padding: 10px 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center; }
-  .instructions__close {
-    position: absolute;
-    top: 0;
-    right: 0;
-    border: none;
-    cursor: pointer; }
-
-.example {
-  display: flex;
-  margin: 5px 0; }
-
-.sq {
-  width: 20px;
-  height: 20px;
-  border: 1px solid black;
-  margin-right: 5px; }
-
-/* 
-light - #fbfbfb
-dark - #141415
-neutral - #3d3d3d || #888
-neutral border for 3d3d3d is 858585 || 7a7a7a
-
-*/
+.read-the-docs {
+  color: #888;
+}

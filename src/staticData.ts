@@ -63,3 +63,47 @@ export const tetraChromaticSettings = [
     }
 ]
 
+export const colourSchemes = [
+    {
+        "id": "monochromatic",
+        "name": "scheme",
+        "value": "monochromatic",
+        "numOfColours": 1
+    },
+    {
+        "id": "complementary",
+        "name": "scheme",
+        "value": "complementary",
+        "numOfColours": 2
+    },
+    {
+        "id": "analogous",
+        "name": "scheme",
+        "value": "analogous",
+        "numOfColours": 3
+    },
+    {
+        "id": "triadic",
+        "name": "scheme",
+        "value": "triadic",
+        "numOfColours": 3
+    },
+    {
+        "id": "split-complementary",
+        "name": "scheme",
+        "value": "split-complementary",
+        "numOfColours": 3
+    },
+    {
+        "id": "square",
+        "name": "scheme",
+        "value": "square",
+        "numOfColours": 4
+    },
+    {
+        "id": "tetradic",
+        "name": "scheme",
+        "value": "tetradic",
+        "numOfColours": 4
+    }
+]

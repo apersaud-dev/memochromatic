@@ -12,11 +12,11 @@ export const gameStart = (numOfColumns: number, setTile: React.Dispatch<SetState
 
 export const buildGrid = (int: number): string[] => {
     let grid: string[] = [];
-    if (int % 5 === 0) {
+    if (Math.abs(int) % 5 === 0) {
         grid = createTilesArray(5);
-    } else if (int % 6 === 0) {
+    } else if (Math.abs(int) % 6 === 0) {
         grid = createTilesArray(6);
-    } else if (int % 7 === 0) {
+    } else if (Math.abs(int) % 7 === 0) {
         grid = createTilesArray(7);
     } else {
         grid = createTilesArray(9);
@@ -27,10 +27,11 @@ export const buildGrid = (int: number): string[] => {
 
 export const createTilesArray = (int: number): string[] => {
     const tiles: string[] = [];
+    const limit = Math.abs(int);
 
     // can replace the nested for loop with a single loop + use uuid instead of r#c# syntax for tiles
     for (let i = 0; i < 4; i++) {
-        for (let j = 0; j < int; j++) {
+        for (let j = 0; j < limit; j++) {
             tiles.push(`r${i}c${j}`)
         }
     }
@@ -57,8 +58,8 @@ export const generateRandomPairs = (columnsState: number, gameTiles: string[], c
 
     randomizePairs(arr1, arr2, gameColours, finalTiles);
     finalTiles.sort((a: ITile, b: ITile) => (a.tile > b.tile ? 1 : -1));
-    console.log("finalTiles");
-    console.log(finalTiles);
+    // console.log("finalTiles");
+    // console.log(finalTiles);
     return finalTiles;
 };
 
@@ -91,7 +92,7 @@ export const gameLogic = (gameTiles: ITile[], selectedTiles: number[], updateSel
         }
         updateTurnCount(0);
         updateSelectedTiles([]);
-    }, 1500);
+    }, 750);
 }
 
 // const gameEngine = (columnsState: any, tilesState: any, turnState: any, selectedTilesState: any, matchedState: any, scoreState: any, updateTilesState: any, updateTurnState: any, updateMatchedState: any, updateScoreState: any, updateGameOver: any) => {
@@ -416,8 +417,8 @@ export const defineBoardWidth = (width: number, columns: number, impMode: boolea
         gridWidth = 468;
     } else {
         const boxDim = defineBoxDim(width, false);
-        console.log(boxDim);
-        console.log(columns);
+        // console.log(boxDim);
+        // console.log(columns);
         gridWidth = (boxDim.length * columns) + (boxDim.margin * (columns * 2));
     }
 
@@ -448,6 +449,18 @@ export const handleInputChange = (value: string | number, state: any) => {
             break;
     }
     state(input);
+}
+
+export const forceMatches = (tiles: ITile[], updateMatchedTiles: Dispatch<SetStateAction<number[]>>) => {
+    const resArr = [];
+    
+    for (let i=1; i <tiles.length; i++) {
+        if(tiles[i].pair !== tiles[0].pair) {
+            // push values into matched array state
+            resArr.push(i);
+        }
+    }
+    updateMatchedTiles(resArr);
 }
 
 

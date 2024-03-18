@@ -13,7 +13,8 @@ const Example: React.FC<IExampleProps> = ({ id, time, startingColour, flipColour
         width: "20px",
         height: "20px",
         background: startingColour,
-        border: "1px solid #8f8f8f",
+        border: "1px solid transparent",
+        borderRadius: "11%",
         padding: "0",
         marginRight: "5px",
         perspective: "300px",
@@ -28,6 +29,8 @@ const Example: React.FC<IExampleProps> = ({ id, time, startingColour, flipColour
         position: "absolute",
         top: "-1px",
         right: "-1px",
+        border: "1px solid transparent",
+        borderRadius: "11%",
         backfaceVisibility: "hidden",
         transform: "rotateY(180deg)"
 
@@ -46,4 +49,3 @@ const Example: React.FC<IExampleProps> = ({ id, time, startingColour, flipColour
 }
 
 export default Example;
-
